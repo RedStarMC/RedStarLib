@@ -1,0 +1,4 @@
+name: RedStarLib
+version: '${version}'
+main: top.redstarmc.plugin.redstarlib.RedStarLib
+api-version: '1.19'
