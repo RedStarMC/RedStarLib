@@ -8,12 +8,15 @@ import top.redstarmc.plugin.redstarlib.manager.ServerManager;
 
 public final class RedStarLib extends JavaPlugin implements RedStarLibInterface{
 
+    private static RedStarLib instance;
+
     private ConfigurationManager configManager;
 
     private ServerManager serverManager;
 
     @Override
     public void onEnable() {
+        instance = this;
         loadManager();
 
     }
@@ -26,7 +29,13 @@ public final class RedStarLib extends JavaPlugin implements RedStarLibInterface{
     @Override
     public void loadManager() {
         configManager = new ImplConfigManager();
+        configManager.init();
+
         serverManager = new ImplServerManager();
+    }
+
+    public static RedStarLib getInstance() {
+        return instance;
     }
 
     public ConfigurationManager getConfigManager() {

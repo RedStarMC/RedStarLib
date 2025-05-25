@@ -3,22 +3,22 @@ package top.redstarmc.plugin.redstarlib.utils;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ConfigMapBuilder<X,Y> {
-    private final Map<X, Y> map = new LinkedHashMap<>();
+public class ConfigMapBuilder<Key, Value> {
+    private final Map<Key, Value> map = new LinkedHashMap<>();
 
-    public static <X, Y> ConfigMapBuilder<X, Y> of(Class<X> keyType, Class<Y> valueType){
+    public static <Key, Value> ConfigMapBuilder<Key, Value> of(Class<Key> keyType, Class<Value> valueType){
         return new ConfigMapBuilder<>();
     }
 
-    public ConfigMapBuilder<X, Y> set(X key, Y value){
+    public ConfigMapBuilder<Key, Value> set(Key key, Value value){
         map.put(key,value);
         return this;
     }
 
-    public Map<X, Y> toMap(){
+    public Map<Key, Value> toMap(){
         return new LinkedHashMap<>(map);
     }
-    public Map<X, Y> build() {
+    public Map<Key, Value> build() {
         return map;
     }
 }
