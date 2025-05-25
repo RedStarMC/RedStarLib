@@ -8,6 +8,11 @@ import top.redstarmc.plugin.redstarlib.manager.ConfigurationManager;
 import top.redstarmc.plugin.redstarlib.manager.LoggerManager;
 import top.redstarmc.plugin.redstarlib.manager.ServerManager;
 
+/**
+ * <h1>RedStarLib 插件主类</h1>
+ * 实现 {@link RedStarLibInterface} 接口，同时也可作为其他使用本插件开发的插件代码规范。 <br>
+ * 内部维护了多个字段，不可被继承（ final 类）。
+ */
 public final class RedStarLib extends JavaPlugin implements RedStarLibInterface{
 
     private static RedStarLib instance;
