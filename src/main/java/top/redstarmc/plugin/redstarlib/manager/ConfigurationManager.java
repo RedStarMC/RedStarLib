@@ -12,7 +12,9 @@ import java.util.Map;
  */
 public abstract class ConfigurationManager {
 
-
+    /**
+     * <h2>初始化方法</h2>
+     */
     public abstract void init();
 
     /**
@@ -48,6 +50,11 @@ public abstract class ConfigurationManager {
         save(config, configFile);
     }
 
+    /**
+     * <h2>从内存中保存 {@link YamlConfiguration} 格式文件</h2>
+     * @param config {@link YamlConfiguration} 内存中配置文件
+     * @param configFile {@link File} IO配置文件
+     */
     public void save(YamlConfiguration config, File configFile){
         try {
             config.save(configFile);

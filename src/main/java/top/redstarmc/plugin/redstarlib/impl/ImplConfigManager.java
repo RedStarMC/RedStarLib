@@ -20,7 +20,7 @@ public class ImplConfigManager extends ConfigurationManager {
 
     private static YamlConfiguration config;
 
-    private static final String versioning = "${version}";
+    private static final String versioning = "0.0.0";
 
     @Override
     public void init() {

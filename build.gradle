@@ -25,7 +25,7 @@ dependencies {
     implementation ('cc.carm.lib:easysql-hikaricp:0.4.7')
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 19
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
