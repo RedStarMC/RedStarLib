@@ -12,6 +12,8 @@
 name: "CodeQL Advanced"
 
 on:
+  # 支持手动触发
+  workflow_dispatch:
   push:
     branches: [ "main" , "dev" ]
   pull_request:
