@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven-publish'
 }
 
 group = 'top.redstarmc.plugin'
@@ -25,7 +26,7 @@ dependencies {
     implementation ('cc.carm.lib:easysql-hikaricp:0.4.7')
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 19
 java {
     def javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -49,5 +50,29 @@ processResources {
     filteringCharset 'UTF-8'
     filesMatching('plugin.yml') {
         expand props
+    }
+}
+
+publishing {
+
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = group
+            artifactId = "RedStarLib"
+            version = version
+
+            from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/RedStarMC/RedStarLib"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
     }
 }
