@@ -22,22 +22,23 @@ public class ImplConfigManager extends ConfigurationManager {
 
     private static final String versioning = "0.0.0";
 
+    public ImplConfigManager(){
+        super(config_file, config);
+    }
+
     @Override
     public void init() {
 
-        config = initFile(config_file);
+        config = initFile();
 
         if (!Objects.equals(config.getString("Versioning"), versioning)) {
 
             config = new YamlConfiguration();
 
-            saveMapConfig(default_config, config ,config_file);
+            saveMapConfig(default_config);
             config.set("Versioning", versioning);
-            save(config, config_file);
+            save();
         }
     }
 
-    public static YamlConfiguration getConfig() {
-        return config;
-    }
 }
