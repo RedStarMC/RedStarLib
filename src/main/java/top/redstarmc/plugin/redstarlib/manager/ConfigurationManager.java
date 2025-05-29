@@ -8,22 +8,39 @@ import java.util.Map;
 
 /**
  * <h1>配置管理器</h1>
- * 抽象类，提供了 {@link YamlConfiguration} 相关的操作代码，以免重复编写IO操作流。
+ * 抽象类，提供了 {@link YamlConfiguration} 相关的操作代码，以免重复编写 IO流 相关操作。
+ * 使用方法：
+ * 1.直接使用，new 出实例即可。
+ * 2.创建子类，super 然后 new 子类即可。
  */
 public abstract class ConfigurationManager {
 
     /**
      * <h2>初始化方法</h2>
+     * 若继承，则需使用该实例。
      */
     public abstract void init();
+
+    private final File configFile;
+
+    private final YamlConfiguration config;
+
+    public ConfigurationManager(File configFile, YamlConfiguration config) {
+        this.configFile = configFile;
+        this.config = config;
+    }
+
+    public ConfigurationManager(ConfigurationManager manager){
+        this.configFile = manager.getConfigFile();
+        this.config = manager.getConfig();
+    }
 
     /**
      * <h2>初始化文件</h2>
      * 如果没有这个文件就自动创建，并返回 {@link YamlConfiguration} 配置文件，方便操作
-     * @param configFile {@link File} 格式的文件，只需要指定路径和文件名称
      * @return 读取到的 {@link YamlConfiguration} 配置文件
      */
-    public YamlConfiguration initFile(File configFile){
+    public YamlConfiguration initFile(){
         if(!configFile.exists()){
             try {
                 configFile.getParentFile().mkdirs();
@@ -39,23 +56,19 @@ public abstract class ConfigurationManager {
     /**
      * <h2>保存 {@link Map} 类型的配置文件</h2>
      * @param configMap {@link Map} 类型的配置文件
-     * @param config {@link YamlConfiguration} 类型的配置文件，可以直接进行内存读写操作
-     * @param configFile {@link File} 类型文件，用于将内存中的配置文件保存
      */
-    public void saveMapConfig(Map<String, Object> configMap, YamlConfiguration config, File configFile){
+    public void saveMapConfig(Map<String, Object> configMap){
         if (!configFile.exists()) return;
 
         configMap.forEach(config::set);
 
-        save(config, configFile);
+        save();
     }
 
     /**
      * <h2>从内存中保存 {@link YamlConfiguration} 格式文件</h2>
-     * @param config {@link YamlConfiguration} 内存中配置文件
-     * @param configFile {@link File} IO配置文件
      */
-    public void save(YamlConfiguration config, File configFile){
+    public void save(){
         try {
             config.save(configFile);
         } catch (IOException e) {
@@ -63,4 +76,12 @@ public abstract class ConfigurationManager {
         }
     }
 
+
+    public File getConfigFile() {
+        return configFile;
+    }
+
+    public YamlConfiguration getConfig() {
+        return config;
+    }
 }
