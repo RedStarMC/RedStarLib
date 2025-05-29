@@ -58,7 +58,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             groupId = group
-            artifactId = "RedStarLib"
+            artifactId = "redstarlib"
             version = version
 
             from components.java
