@@ -30,7 +30,7 @@ public final class RedStarLib extends JavaPlugin implements RedStarLibInterface{
         instance = this;
         loadManager();
 
-        loggerManager.info("a");
+        loggerManager.debugDataBase("a");
 
     }
 
@@ -44,7 +44,7 @@ public final class RedStarLib extends JavaPlugin implements RedStarLibInterface{
         configManager = new ImplConfigManager();
         configManager.init();
 
-        loggerManager = new ImplLoggerManager(INFO_PREFIX);
+        loggerManager = new ImplLoggerManager(INFO_PREFIX, true);
 
         serverManager = new ImplServerManager(INFO_PREFIX);
     }

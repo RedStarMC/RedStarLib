@@ -23,6 +23,7 @@ repositories {
 dependencies {
     compileOnly "org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT"
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.1.0'
+    compileOnly 'org.jetbrains:annotations:23.0.0'
     implementation ('cc.carm.lib:easysql-hikaricp:0.4.7')
 }
 
