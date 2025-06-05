@@ -7,17 +7,19 @@ public abstract class LoggerManager {
 
     public String INFO_PREFIX;
 
-    public LoggerManager(String INFO_PREFIX) {
+    public boolean debugMode;
+
+    public LoggerManager(String INFO_PREFIX, boolean debugMode) {
         this.INFO_PREFIX = INFO_PREFIX;
+        this.debugMode = debugMode;
     }
 
-    public boolean debugMode;
 
     /**
      * <h2>发送插件普通信息</h2>
      * @param messages 字符串
      */
-    public final void info(String... messages) {
+    public void info(String... messages) {
         if (messages == null) return;
         for (String message : messages) {
             if (message == null) continue;
@@ -30,7 +32,7 @@ public abstract class LoggerManager {
      * @param messages 字符串
      * @param objects 传入的格式化内容
      */
-    public final void info(String messages,Object... objects) {
+    public void info(String messages, Object... objects) {
         if (messages == null) return;
         Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§a[INFO] §r" + toStrings.format(messages,objects) + "§r");
     }
@@ -39,7 +41,7 @@ public abstract class LoggerManager {
      * <h2>发送插件警告信息</h2>
      * @param messages 字符串
      */
-    public final void warn(String... messages) {
+    public void warn(String... messages) {
         if (messages == null) return;
         for (String message : messages) {
             if (message == null) continue;
@@ -51,7 +53,7 @@ public abstract class LoggerManager {
      * <h2>发送插件错误信息</h2>
      * @param messages 字符串
      */
-    public final void error(String... messages) {
+    public void error(String... messages) {
         if (messages == null) return;
         for (String message : messages) {
             if (message == null) continue;
@@ -63,7 +65,7 @@ public abstract class LoggerManager {
      * <h2>发送插件debug信息</h2>
      * @param messages 字符串
      */
-    public final void debug(String... messages) {
+    public void debug(String... messages) {
         if (messages == null) return;
         if (isDebugMode()) {
             for (String message : messages) {
@@ -77,7 +79,7 @@ public abstract class LoggerManager {
      * <h2>发送插件debug堆栈</h2>
      * @param e 堆栈
      */
-    public final void debug(Throwable e) {
+    public void debug(Throwable e) {
         if (e == null) return;
         if (isDebugMode())
             e.printStackTrace();
@@ -88,7 +90,7 @@ public abstract class LoggerManager {
      * @param e 堆栈
      * @param msg 字符串
      */
-    public final void debug(String msg, Throwable e) {
+    public void debug(String msg, Throwable e) {
         if (msg == null || e == null) return;
         if (isDebugMode()) {
             debug(msg);
@@ -96,8 +98,32 @@ public abstract class LoggerManager {
         }
     }
 
+    /**
+     * <h2>发送插件 数据库 debug信息</h2>
+     * @param messages 字符串
+     */
+    public void debugDataBase(String messages, Object... objects) {
+        if (messages == null) return;
+        if (isDebugMode()) {
+            Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§6[DEBUG DB] §r" + toStrings.format(messages,objects) + "§r");
+        }
+    }
 
-
+    /**
+     * 抛出错误堆栈和错误信息
+     * @param throwable 堆栈
+     * @param messages 信息
+     */
+    public void crash(Throwable throwable, String... messages){
+        for (String message : messages) {
+            if (message == null) continue;
+            Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§c[ERROR] §r" + message + "§r");
+        }
+        Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§c[ERROR] §r" + "抛出错误信息 ->" + "§r");
+        Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§c[ERROR] §r" + throwable.getMessage() + "§r");
+        Bukkit.getConsoleSender().sendMessage(INFO_PREFIX + "§c[ERROR] §r" + "抛出错误堆栈 ->" + "§r");
+        throwable.printStackTrace();
+    }
 
     public String getINFO_PREFIX() {
         return INFO_PREFIX;

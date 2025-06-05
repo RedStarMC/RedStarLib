@@ -36,7 +36,7 @@ public abstract class ConfigurationManager {
     }
 
     /**
-     * <h2>初始化文件</h2>
+     * <h2>创建文件</h2>
      * 如果没有这个文件就自动创建，并返回 {@link YamlConfiguration} 配置文件，方便操作
      * @return 读取到的 {@link YamlConfiguration} 配置文件
      */
@@ -63,6 +63,11 @@ public abstract class ConfigurationManager {
         configMap.forEach(config::set);
 
         save();
+    }
+
+    public void saveJarConfig(String fileName){
+
+
     }
 
     /**
