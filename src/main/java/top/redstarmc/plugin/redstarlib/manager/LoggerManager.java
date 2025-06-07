@@ -3,6 +3,13 @@ package top.redstarmc.plugin.redstarlib.manager;
 import org.bukkit.Bukkit;
 import top.redstarmc.plugin.redstarlib.utils.toStrings;
 
+/**
+ * <h1>日志管理器</h1>
+ * 抽象类，提供了日志相关的操作代码，以免重复编写发送日志的操作。
+ * 使用方法：
+ * 1.直接使用，new 出实例即可。
+ * 2.创建子类，super 然后 new 子类即可。
+ */
 public abstract class LoggerManager {
 
     public String INFO_PREFIX;
