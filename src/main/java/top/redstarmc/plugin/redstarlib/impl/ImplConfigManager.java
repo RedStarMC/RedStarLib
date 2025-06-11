@@ -7,7 +7,6 @@ import top.redstarmc.plugin.redstarlib.utils.ConfigMapBuilder;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Objects;
 
 public class ImplConfigManager extends ConfigurationManager {
 
@@ -16,29 +15,29 @@ public class ImplConfigManager extends ConfigurationManager {
             .toMap();
 
 
-    private static final File config_file = new File(RedStarLib.getInstance().getDataFolder(),"config.yml");
-
-    private static YamlConfiguration config;
+    private static final File config_file = new File(RedStarLib.getInstance().getDataFolder(),"plugin.yml");
 
     private static final String versioning = "0.0.0";
 
     public ImplConfigManager(){
-        super(config_file, config);
+        super(config_file);
     }
 
     @Override
     public void init() {
 
-        config = initFile();
+        YamlConfiguration config = getConfig();
 
-        if (!Objects.equals(config.getString("Versioning"), versioning)) {
+        saveJarConfig("plugin.yml", RedStarLib.getInstance());
 
-            config = new YamlConfiguration();
-
-            saveMapConfig(default_config);
-            config.set("Versioning", versioning);
-            save();
-        }
+//        if (!Objects.equals(config.getString("Versioning"), versioning)) {
+//
+//            config = new YamlConfiguration();
+//
+//            saveMapConfig(default_config);
+//            config.set("Versioning", versioning);
+//            save();
+//        }
     }
 
 }
